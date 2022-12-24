@@ -1,7 +1,7 @@
 import React from 'react';
 import piano from './piano.png';
 
-function PianoBackground() {
+const PianoBackground = () : JSX.Element => {
   const imageStyles = {
     width: '100%',
   }
