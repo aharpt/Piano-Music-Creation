@@ -13,20 +13,30 @@ type Props = {
     songTiming?: songTimingType;
 }
 
-const BeginnerMode = ({musicKey, chordList, songTiming} : Props) : JSX.Element => {
+const BeginnerMode = ({musicKey, chordList, songTiming = {topTiming: 4, bottomTiming: 4}} : Props) : JSX.Element => {
   const containerStyles = {
     padding: '25px 0 50px 0',
-  }
+  };
+
+  const headerStyles = {
+    fontSize: '18px',
+    fontWeight: 'bold',
+  };
+
+  const chordStyles = {
+    marginLeft: '25px'
+  };
 
   return (
     <div style={containerStyles}>
-        <div>Available Notes: {MUSIC_NOTES_PER_KEY[musicKey].join(', ')}</div>
-        <div>Chord List:</div>
+        <div><span style={headerStyles}>Available Notes:</span> {MUSIC_NOTES_PER_KEY[musicKey].join(', ')}</div>
+        <div style={headerStyles}>Chord List:</div>
         {chordList.map(chord => {
           return (
-            <span style={{marginLeft: '20px'}}>- <b>{chord}:</b> {NOTES_PER_CHORD[chord].join(', ')}</span>
+            <div><b style={chordStyles}>- {chord}:</b> {NOTES_PER_CHORD[chord].join(', ')}</div>
           )
         })}
+        <div><span style={headerStyles}>Timing:</span> {songTiming.topTiming} {songTiming.bottomTiming} ({songTiming.topTiming} beats per measure)</div>
     </div>
   );
 }
