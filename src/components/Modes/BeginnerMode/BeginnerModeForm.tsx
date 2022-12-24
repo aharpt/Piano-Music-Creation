@@ -2,6 +2,7 @@ import React from 'react';
 import BeginnerMode from './BeginnerMode';
 
 const MUSIC_KEYS = [
+    "",
     "A",
     "B",
     "C",
@@ -54,7 +55,7 @@ const onCheckboxSelection = (event: any) : void => {
                 <label htmlFor="key">Please Select A Music Key</label>
                 <br />
                 <select style={selectStyles} value={musicKey} onChange={event => setMusicKey(event.target.value)} name="musicKey" id="key">
-                    {MUSIC_KEYS.map(key => <option value={key.toLowerCase()}>{key}</option>)}
+                    {MUSIC_KEYS.map(key => <option value={key}>{key}</option>)}
                 </select>
             </section>
             <section style={sectionStyles}>
@@ -62,8 +63,8 @@ const onCheckboxSelection = (event: any) : void => {
                 {AVAILABLE_CHORDS.map(chord => {
                     return (
                         <section style={chordSectionStyles}>
-                            <input onClick={event => {onCheckboxSelection(event)}} type="checkbox" id={chord.toLowerCase()} name={chord.toLowerCase()} />
-                            <label htmlFor={chord.toLowerCase()}>{chord}</label>
+                            <input onClick={event => {onCheckboxSelection(event)}} type="checkbox" id={chord} name={chord} />
+                            <label htmlFor={chord}>{chord}</label>
                         </section>
                     )
                 })}
