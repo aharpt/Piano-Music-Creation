@@ -4,11 +4,11 @@ import AvailableModes from './components/Modes/AvailableModes';
 
 const App = () : JSX.Element => {
   return (
-    <div style={{textAlign: 'center'}} className="App">
-      <header className="App-header">
-        <h1>Placeholder Heading</h1>
+    <div style={{textAlign: 'center'}}>
+      <header style={{textAlign: 'left', marginLeft: '25px'}}>
+        <h1>Create A Melody From Scratch</h1>
       </header>
-      <section className="body">
+      <section>
         <PianoBackground />
         <AvailableModes />
       </section>

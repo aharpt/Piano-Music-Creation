@@ -1,4 +1,3 @@
-import React from 'react';
 import piano from './piano.png';
 
 const PianoBackground = () : JSX.Element => {

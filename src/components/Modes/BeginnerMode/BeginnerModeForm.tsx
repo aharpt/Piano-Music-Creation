@@ -37,17 +37,10 @@ const onFormButtonClick = () => {
 }
 
 const melody = beginnerMelody(chordList as ChordsType[]);
-const songTiming : {
-    topTiming: number | string;
-    bottomTiming: number | string;
-} = {
-    topTiming: 3,
-    bottomTiming: 4,
-};
 
   return (
     <>
-    {shouldShowBeginnerMode ? <BeginnerMode songTiming={songTiming} melody={melody} musicKey={musicKey as KeysType} chordList={chordList as ChordsType[]} /> :
+    {shouldShowBeginnerMode ? <BeginnerMode melody={melody} musicKey={musicKey as KeysType} chordList={chordList as ChordsType[]} /> :
         <form style={formStyles}>
             <section style={sectionStyles}>
                 <label htmlFor="key">Please Select A Music Key</label>
@@ -70,7 +63,7 @@ const songTiming : {
             </section>
         </form>
     }
-        <ABCMusicNotation songTiming={songTiming} chordList={chordList as ChordsType[]} melody={melody} canSeeMelody={canSeeMelody} musicKey={musicKey} />
+        <ABCMusicNotation chordList={chordList as ChordsType[]} melody={melody} canSeeMelody={canSeeMelody} musicKey={musicKey} />
     </>
   );
 }
