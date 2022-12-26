@@ -9,14 +9,10 @@ type Props = {
     musicKey: string;
     chordList: ChordsType[];
     melody: string[];
-    songTiming: {
-        topTiming: number | string;
-        bottomTiming: number | string;
-    }
 }
 
 type DisplayType = 'inline' | 'block' | 'inline-block' | 'none';
-const ABCMusicNotation = ({canSeeMelody, musicKey, chordList, melody, songTiming} : Props) => {
+const ABCMusicNotation = ({canSeeMelody, musicKey, chordList, melody} : Props) => {
     const [displayValue, setDisplayValue] = React.useState<DisplayType>('none');
 
     const sectionStyles = {
@@ -37,7 +33,7 @@ const ABCMusicNotation = ({canSeeMelody, musicKey, chordList, melody, songTiming
     };
 
     const songConstruction = constructSong(chordList, melody);
-    abcjs.renderAbc("paper", `X:1\nM: ${songTiming.topTiming}/${songTiming.bottomTiming}\nL: 1/4\nK:${musicKey}\n${songConstruction}\n`);
+    abcjs.renderAbc("paper", `X:1\nM: 3/4\nL: 1/4\nK:${musicKey}\n${songConstruction}\n`);
 
     return (
         <>
