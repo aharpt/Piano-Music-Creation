@@ -12,7 +12,7 @@ export const beginnerMelody = (chordList : ChordsType[]) : string[] => {
 
     for (let i = 0; i < chordList.length; i++) {
             for (let j = 0; j < NOTES_PER_CHORD[chordList[i]].length; j++) {
-                melodyNotes.push(NOTES_PER_CHORD[chordList[i]][(melodyPattern[i][j] - 1)]);
+                melodyNotes.push(NOTES_PER_CHORD[chordList[i]][(melodyPattern[i % 3][j] - 1)]);
             }
     }
 
