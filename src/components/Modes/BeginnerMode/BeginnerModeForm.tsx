@@ -1,9 +1,12 @@
 import React from 'react';
 import BeginnerMode from './BeginnerMode';
+import { beginnerMelody } from '../../../utils/createMelody';
 import { MUSIC_KEYS, AVAILABLE_CHORDS, type KeysType, type ChordsType } from '../../../utils/musicUtils';
+import ABCMusicNotation from '../../ABCMusicNotation/ABCMusicNotation';
 
 const BeginnerModeForm = () : JSX.Element => {
     const [shouldShowBeginnerMode, setShouldShowBeginnerMode] = React.useState(false);
+    const [canSeeMelody, setCanSeeMelody] = React.useState(false);
     const [musicKey, setMusicKey] = React.useState('');
     const [chordList, setChordList] = React.useState<unknown[]>([]);
 
@@ -28,9 +31,23 @@ const onCheckboxSelection = (event: any) : void => {
     setChordList(prevChordList => [...prevChordList, event.target.name]);
 }
 
+const onFormButtonClick = () => {
+    setShouldShowBeginnerMode(true);
+    setCanSeeMelody(true);
+}
+
+const melody = beginnerMelody(chordList as ChordsType[]);
+const songTiming : {
+    topTiming: number | string;
+    bottomTiming: number | string;
+} = {
+    topTiming: 3,
+    bottomTiming: 4,
+};
+
   return (
     <>
-    {shouldShowBeginnerMode ? <BeginnerMode musicKey={musicKey as KeysType} chordList={chordList as ChordsType[]} /> :
+    {shouldShowBeginnerMode ? <BeginnerMode songTiming={songTiming} melody={melody} musicKey={musicKey as KeysType} chordList={chordList as ChordsType[]} /> :
         <form style={formStyles}>
             <section style={sectionStyles}>
                 <label htmlFor="key">Please Select A Music Key</label>
@@ -49,10 +66,11 @@ const onCheckboxSelection = (event: any) : void => {
                         </section>
                     )
                 })}
-                <button type='button' onClick={() => {setShouldShowBeginnerMode(true)}}>Submit</button>
+                <button type='button' onClick={onFormButtonClick}>Submit</button>
             </section>
         </form>
     }
+        <ABCMusicNotation songTiming={songTiming} chordList={chordList as ChordsType[]} melody={melody} canSeeMelody={canSeeMelody} musicKey={musicKey} />
     </>
   );
 }
