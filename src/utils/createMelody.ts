@@ -18,3 +18,19 @@ export const beginnerMelody = (chordList : ChordsType[]) : string[] => {
 
     return melodyNotes;
 }
+
+export const constructSong = (chordList : ChordsType[], melody: string[]) : string => {
+    let notesConstruction = '';
+
+    for (let i = 0; i < chordList.length; i++) {
+        let chordLength = NOTES_PER_CHORD[chordList[i]].length;
+
+        notesConstruction += `"${chordList[i]}"`
+        for (let j = 0; j < chordLength; j++) {
+            notesConstruction += melody[(i * chordLength) + j];
+        }
+        notesConstruction += '|';
+    }
+
+    return notesConstruction;
+}

@@ -22,10 +22,8 @@ const AvailableModes = () : JSX.Element => {
                 <span style={{...modeStyles, marginRight: '15px'}} onClick={() => {setShouldShowBeginnerMode(true)}}>Beginner</span>
                 <span style={modeStyles} onClick={() => {setShouldShowBeginnerMode(false)}}>Reset Mode</span>
         </section>
-        <section>
-            {
-                shouldShowBeginnerMode ? <BeginnerModeForm /> : null
-            }
+        <section style={sectionStyles}>
+            {shouldShowBeginnerMode ? <BeginnerModeForm /> : null}
         </section>
       </>
     );
