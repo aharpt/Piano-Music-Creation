@@ -1,4 +1,5 @@
 import React from 'react';
+import { beginnerMelody } from '../../../utils/createMelody';
 import {MUSIC_NOTES_PER_KEY, NOTES_PER_CHORD} from '../../../utils/musicUtils';
 import {type KeysType, type ChordsType} from '../../../utils/musicUtils';
 
@@ -13,7 +14,7 @@ type Props = {
     songTiming?: songTimingType;
 }
 
-const BeginnerMode = ({musicKey, chordList, songTiming = {topTiming: 4, bottomTiming: 4}} : Props) : JSX.Element => {
+const BeginnerMode = ({musicKey, chordList, songTiming = {topTiming: 3, bottomTiming: 4}} : Props) : JSX.Element => {
   const containerStyles = {
     padding: '25px 0 50px 0',
   };
@@ -27,6 +28,8 @@ const BeginnerMode = ({musicKey, chordList, songTiming = {topTiming: 4, bottomTi
     marginLeft: '25px'
   };
 
+  const melody = beginnerMelody(chordList);
+
   return (
     <div style={containerStyles}>
         <div><span style={headerStyles}>Available Notes:</span> {MUSIC_NOTES_PER_KEY[musicKey].join(', ')}</div>
@@ -37,6 +40,7 @@ const BeginnerMode = ({musicKey, chordList, songTiming = {topTiming: 4, bottomTi
           )
         })}
         <div><span style={headerStyles}>Timing:</span> {songTiming.topTiming} {songTiming.bottomTiming} ({songTiming.topTiming} beats per measure)</div>
+        <div><span style={headerStyles}>Generated Melody:</span> {melody.join(', ')}</div>
     </div>
   );
 }
