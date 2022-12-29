@@ -29,7 +29,7 @@ const BeginnerMode = ({musicKey, chordList, melody} : Props) : JSX.Element => {
         <div style={headerStyles}>Chord List:</div>
         {chordList.map(chord => {
           return (
-            <div><span style={chordStyles}>- {chord}:</span> {NOTES_PER_CHORD[chord].join(', ')}</div>
+            <div key={chord}><span style={chordStyles}>- {chord}:</span> {NOTES_PER_CHORD[chord].join(', ')}</div>
           )
         })}
         <div><span style={headerStyles}>Timing:</span> 3/4 (3 beats per measure)</div>

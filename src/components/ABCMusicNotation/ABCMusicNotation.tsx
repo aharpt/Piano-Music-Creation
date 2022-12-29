@@ -35,10 +35,18 @@ const ABCMusicNotation = ({canSeeMelody, musicKey, chordList, melody} : Props) =
     const songConstruction = constructSong(chordList, melody);
     abcjs.renderAbc("paper", `X:1\nM: 3/4\nL: 1/4\nK:${musicKey}\n${songConstruction}\n`);
 
+    const onMelodyClick = () => {
+        if (displayValue === 'none') {
+            setDisplayValue('inline-block');
+        } else {
+            setDisplayValue('none');
+        }
+    }
+
     return (
         <>
             <section style={sectionStyles}>
-                    <span aria-disabled={true} style={modeStyles} onClick={() => {setDisplayValue('inline-block')}}>Show Melody</span>
+                    <span style={modeStyles} onClick={onMelodyClick}>{displayValue === 'none' ? 'Show' : 'Hide'} Melody</span>
             </section>
             <div style={paperStyles} id="paper"></div>
         </>
