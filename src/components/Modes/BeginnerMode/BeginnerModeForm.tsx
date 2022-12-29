@@ -9,7 +9,7 @@ const BeginnerModeForm = () : JSX.Element => {
     const [canSeeMelody, setCanSeeMelody] = React.useState(false);
     const [shouldDisableSubmit, setShouldDisableSubmit] = React.useState(true);
     const [chordsChecked, setChordsChecked] = React.useState(0);
-    const [musicKey, setMusicKey] = React.useState('');
+    const [musicKey, setMusicKey] = React.useState(MUSIC_KEYS[0]);
     const [chordList, setChordList] = React.useState<unknown[]>([]);
 
     const formStyles = {
@@ -76,7 +76,7 @@ const BeginnerModeForm = () : JSX.Element => {
             <section style={sectionStyles}>
                 <label htmlFor="key">Please Select A Music Key</label>
                 <br />
-                <select style={selectStyles} value={musicKey} onChange={event => setMusicKey(event.target.value)} name="musicKey" id="key">
+                <select style={selectStyles} value={musicKey} onChange={event => setMusicKey(event.target.value as KeysType)} name="musicKey" id="key">
                     {MUSIC_KEYS.map(key => <option value={key}>{key}</option>)}
                 </select>
             </section>
