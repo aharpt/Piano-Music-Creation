@@ -77,14 +77,14 @@ const BeginnerModeForm = () : JSX.Element => {
                 <label htmlFor="key">Please Select A Music Key</label>
                 <br />
                 <select style={selectStyles} value={musicKey} onChange={event => setMusicKey(event.target.value as KeysType)} name="musicKey" id="key">
-                    {MUSIC_KEYS.map(key => <option value={key}>{key}</option>)}
+                    {MUSIC_KEYS.map(key => <option key={key} value={key}>{key}</option>)}
                 </select>
             </section>
             <section style={sectionStyles}>
                 <span>Please Select your Desired Chords</span><br />
                 {AVAILABLE_CHORDS.map(chord => {
                     return (
-                        <section style={chordSectionStyles}>
+                        <section key={chord} style={chordSectionStyles}>
                             <input onClick={event => {onCheckboxSelection(event)}} type="checkbox" id={chord} name={chord} />
                             <label htmlFor={chord}>{chord}</label>
                         </section>
