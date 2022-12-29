@@ -35,7 +35,7 @@ const ABCMusicNotation = ({canSeeMelody, musicKey, chordList, melody} : Props) =
     const songConstruction = constructSong(chordList, melody);
     abcjs.renderAbc("paper", `X:1\nM: 3/4\nL: 1/4\nK:${musicKey}\n${songConstruction}\n`);
 
-    const onMelodyClick = () => {
+    const onMelodyClick = () : void => {
         if (displayValue === 'none') {
             setDisplayValue('inline-block');
         } else {
@@ -43,10 +43,24 @@ const ABCMusicNotation = ({canSeeMelody, musicKey, chordList, melody} : Props) =
         }
     }
 
+    const printMelody = () : void => {
+        const melody = document.getElementById("paper")?.innerHTML;
+        const a = window.open('', '', 'height=800, width=1400');
+
+        if (a === null) {
+            //If melody cannot be printed
+        } else {
+            a.document.write(melody ?? '');
+            a.document.close();
+            a.print();
+        }
+    }
+
     return (
         <>
             <section style={sectionStyles}>
-                    <span style={modeStyles} onClick={onMelodyClick}>{displayValue === 'none' ? 'Show' : 'Hide'} Melody</span>
+                    <span style={{...modeStyles, marginRight: '15px'}} onClick={onMelodyClick}>{displayValue === 'none' ? 'Show' : 'Hide'} Melody</span>
+                    <span style={modeStyles} onClick={printMelody}>Print Melody</span>
             </section>
             <div style={paperStyles} id="paper"></div>
         </>
