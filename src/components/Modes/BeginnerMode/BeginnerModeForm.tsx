@@ -56,6 +56,7 @@ const BeginnerModeForm = () : JSX.Element => {
         if (event.target.checked) {
             setChordList(prevChordList => [...prevChordList, event.target.name]);
             setChordsChecked(prevChordsChecked => prevChordsChecked + 1);
+            event.target.checked = false;
         } else {
             setChordList(removeChordSelection(event.target.name));
             setChordsChecked(prevChordsChecked => prevChordsChecked - 1);
@@ -82,14 +83,15 @@ const BeginnerModeForm = () : JSX.Element => {
             </section>
             <section style={sectionStyles}>
                 <span>Please Select your Desired Chords</span><br />
-                {AVAILABLE_CHORDS.map(chord => {
+                {AVAILABLE_CHORDS.map((chord, index) => {
                     return (
-                        <section key={chord} style={chordSectionStyles}>
+                        <section key={`${chord}_${index}`} style={chordSectionStyles}>
                             <input onClick={event => {onCheckboxSelection(event)}} type="checkbox" id={chord} name={chord} />
                             <label htmlFor={chord}>{chord}</label>
                         </section>
                     )
                 })}
+                <textarea readOnly={true} rows={5} cols={25} value={chordList.join(', ')}></textarea>
                 <br />
                 <button disabled={shouldDisableSubmit} style={buttonStyles} type='button' onClick={onFormButtonClick}>Submit</button>
             </section>
