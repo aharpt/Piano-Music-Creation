@@ -27,9 +27,9 @@ const BeginnerMode = ({musicKey, chordList, melody} : Props) : JSX.Element => {
     <div style={containerStyles}>
         <div><span style={headerStyles}>Available Notes:</span> {MUSIC_NOTES_PER_KEY[musicKey].join(', ')}</div>
         <div style={headerStyles}>Chord List:</div>
-        {chordList.map(chord => {
+        {chordList.map((chord, index) => {
           return (
-            <div key={chord}><span style={chordStyles}>- {chord}:</span> {NOTES_PER_CHORD[chord].join(', ')}</div>
+            <div key={`${chord}_${index}`}><span style={chordStyles}>- {chord}:</span> {NOTES_PER_CHORD[chord].join(', ')}</div>
           )
         })}
         <div><span style={headerStyles}>Timing:</span> 3/4 (3 beats per measure)</div>
