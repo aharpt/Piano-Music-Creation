@@ -3,6 +3,7 @@ import abcjs from "abcjs";
 import 'abcjs/abcjs-audio.css';
 import { constructSong } from "../../utils/createMelody";
 import type { ChordsType } from "../../utils/musicUtils";
+import { topTimeSignature } from "../../utils/musicUtils";
 
 type Props = {
     canSeeMelody: boolean;
@@ -33,7 +34,7 @@ const ABCMusicNotation = ({canSeeMelody, musicKey, chordList, melody} : Props) =
     };
 
     const songConstruction = constructSong(chordList, melody);
-    abcjs.renderAbc("paper", `X:1\nM: 3/4\nL: 1/4\nK:${musicKey}\n${songConstruction}\n`);
+    abcjs.renderAbc("paper", `X:1\nM: ${topTimeSignature}/4\nL: 1/4\nK:${musicKey}\n${songConstruction}\n`);
 
     const onMelodyClick = () : void => {
         if (displayValue === 'none') {

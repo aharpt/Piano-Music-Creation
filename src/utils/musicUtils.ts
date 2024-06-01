@@ -46,3 +46,5 @@ export const NOTES_PER_CHORD : {[key in ChordsType]: string[]} = {
     G: ['G', 'B', 'D'],
     Gm: ['G', 'B#', 'D'],
 }
+
+export const topTimeSignature = 4; 
