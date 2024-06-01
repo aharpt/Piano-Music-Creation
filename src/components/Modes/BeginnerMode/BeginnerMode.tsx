@@ -1,6 +1,6 @@
 import React from 'react';
-import {MUSIC_NOTES_PER_KEY, NOTES_PER_CHORD} from '../../../utils/musicUtils';
-import {type KeysType, type ChordsType} from '../../../utils/musicUtils';
+import {MUSIC_NOTES_PER_KEY, NOTES_PER_CHORD, topTimeSignature} from '../../../utils/musicUtils';
+import type {KeysType, ChordsType} from '../../../utils/musicUtils';
 
 type Props = {
     musicKey: KeysType;
@@ -32,7 +32,7 @@ const BeginnerMode = ({musicKey, chordList, melody} : Props) : JSX.Element => {
             <div key={`${chord}_${index}`}><span style={chordStyles}>- {chord}:</span> {NOTES_PER_CHORD[chord].join(', ')}</div>
           )
         })}
-        <div><span style={headerStyles}>Timing:</span> 3/4 (3 beats per measure)</div>
+        <div><span style={headerStyles}>Timing:</span> {topTimeSignature}/4 ({topTimeSignature} beats per measure)</div>
         <div><span style={headerStyles}>Generated Melody:</span> {melody.join(', ')}</div>
     </div>
   );
