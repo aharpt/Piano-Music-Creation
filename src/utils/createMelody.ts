@@ -25,9 +25,28 @@ export const constructSong = (chordList : ChordsType[], melody: string[]) : stri
     for (let i = 0; i < chordList.length; i++) {
         let chordLength = NOTES_PER_CHORD[chordList[i]].length;
 
-        notesConstruction += `"${chordList[i]}"`
-        for (let j = 0; j < topTimeSignature; j++) {
-            notesConstruction += melody[(i * chordLength) + (j % 3)];
+        notesConstruction += `"${chordList[i]}"`;
+        let numberOfNotes;
+        if (i === 0 || (i+2) === chordList.length) {
+            numberOfNotes = 4;
+        } else if ((i+1) === chordList.length) {
+            numberOfNotes = 1;
+        } else {
+            numberOfNotes = 3;
+        }
+
+        for (let j = 0; j < numberOfNotes; j++) {
+            if (numberOfNotes === 4) {
+                notesConstruction += melody[(i * chordLength) + (j % 3)];
+            } else if (numberOfNotes === 1) {
+                notesConstruction += `${melody[(i * chordLength) + (j % 3)]}4`;
+            } else {
+                if (j == 1) {
+                    notesConstruction += `${melody[(i * chordLength) + (j % 3)]}2`;
+                } else {
+                    notesConstruction += melody[(i * chordLength) + (j % 3)];
+                }
+            }
         }
         notesConstruction += '|';
     }

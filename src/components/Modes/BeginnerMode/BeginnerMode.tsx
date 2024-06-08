@@ -1,5 +1,4 @@
-import React from 'react';
-import {MUSIC_NOTES_PER_KEY, NOTES_PER_CHORD, topTimeSignature} from '../../../utils/musicUtils';
+import {MUSIC_NOTES_PER_KEY, NOTES_PER_CHORD, topTimeSignature, convertMusicNotesPerKey, convertChordNotes, convertMelodyNotes} from '../../../utils/musicUtils';
 import type {KeysType, ChordsType} from '../../../utils/musicUtils';
 
 type Props = {
@@ -25,15 +24,15 @@ const BeginnerMode = ({musicKey, chordList, melody} : Props) : JSX.Element => {
 
   return (
     <div style={containerStyles}>
-        <div><span style={headerStyles}>Available Notes:</span> {MUSIC_NOTES_PER_KEY[musicKey].join(', ')}</div>
+        <div><span style={headerStyles}>Available Notes:</span> {convertMusicNotesPerKey(MUSIC_NOTES_PER_KEY[musicKey]).join(', ')}</div>
         <div style={headerStyles}>Chord List:</div>
-        {chordList.map((chord, index) => {
+        {chordList.map((chord : ChordsType, index) => {
           return (
-            <div key={`${chord}_${index}`}><span style={chordStyles}>- {chord}:</span> {NOTES_PER_CHORD[chord].join(', ')}</div>
+            <div key={`${chord}_${index}`}><span style={chordStyles}>- {chord}:</span> {convertChordNotes(NOTES_PER_CHORD[chord]).join(', ')}</div>
           )
         })}
         <div><span style={headerStyles}>Timing:</span> {topTimeSignature}/4 ({topTimeSignature} beats per measure)</div>
-        <div><span style={headerStyles}>Generated Melody:</span> {melody.join(', ')}</div>
+        <div><span style={headerStyles}>Generated Melody:</span> {convertMelodyNotes(melody).join(', ')}</div>
     </div>
   );
 }
