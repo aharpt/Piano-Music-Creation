@@ -48,7 +48,11 @@ export const constructSong = (chordList : ChordsType[], melody: string[]) : stri
                 }
             }
         }
-        notesConstruction += '|';
+        if (i === (chordList.length - 1)) { 
+            notesConstruction += '|]';
+        } else {
+            notesConstruction += '|';
+        }
     }
 
     return notesConstruction;
