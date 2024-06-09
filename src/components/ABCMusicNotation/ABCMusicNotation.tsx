@@ -15,6 +15,9 @@ type Props = {
 type DisplayType = 'inline' | 'block' | 'inline-block' | 'none';
 const ABCMusicNotation = ({canSeeMelody, musicKey, chordList, melody} : Props) => {
     const [displayValue, setDisplayValue] = React.useState<DisplayType>('none');
+    const [playBtnDisplay, setPlayBtnDisplay] = React.useState<DisplayType>('inline-block');
+    const [stopBtnDisplay, setStopBtnDisplay] = React.useState<DisplayType>('none');
+    const [midiBuffer] = React.useState<abcjs.MidiBuffer>(new abcjs.synth.CreateSynth());
 
     const sectionStyles = {
         maxWidth: '80%',
@@ -34,7 +37,9 @@ const ABCMusicNotation = ({canSeeMelody, musicKey, chordList, melody} : Props) =
     };
 
     const songConstruction = constructSong(chordList, melody);
-    abcjs.renderAbc("paper", `X:1\nM: ${topTimeSignature}/4\nL: 1/4\nK:${musicKey}\n${songConstruction}\n`);
+    const visualObj = abcjs.renderAbc("paper", `X:1\nQ:180\nM: ${topTimeSignature}/4\nL: 1/4\nK:${musicKey}\n${songConstruction}\n`);
+
+
 
     const onMelodyClick = () : void => {
         if (displayValue === 'none') {
@@ -57,11 +62,57 @@ const ABCMusicNotation = ({canSeeMelody, musicKey, chordList, melody} : Props) =
         }
     }
 
+    const playAudio = (withChords : boolean) => {
+        if (abcjs.synth.supportsAudio()) {
+            setPlayBtnDisplay('none');
+            setStopBtnDisplay('inline-block');
+
+            const audioContext = new window.AudioContext();
+            audioContext.resume().then(function () {
+
+                return midiBuffer.init({
+                    visualObj: visualObj[0],
+                    options: {
+                        chordsOff: !withChords,
+                    },
+                    audioContext: audioContext,
+                    millisecondsPerMeasure: visualObj[0].millisecondsPerMeasure(),
+                }).then(function (response) {
+                    console.log("Notes loaded: ", response)
+                    return midiBuffer.prime();
+                }).then(function (response) {
+                    midiBuffer.start();
+                    return Promise.resolve();
+                }).catch(function (error) {
+                    console.log("Err: ", error);
+                });
+            });
+
+            if (audioContext.state === 'closed') {
+                setPlayBtnDisplay('inline-block');
+                setStopBtnDisplay('none');
+            }
+        }
+    }
+
+    const stopAudio = () => {
+        if (midiBuffer) {
+            setPlayBtnDisplay('inline-block');
+            setStopBtnDisplay('none');
+            midiBuffer.stop();
+        }
+    }
+
     return (
         <>
             <section style={sectionStyles}>
                     <span style={{...modeStyles, marginRight: '15px'}} onClick={onMelodyClick}>{displayValue === 'none' ? 'Show' : 'Hide'} Melody</span>
                     <span style={modeStyles} onClick={printMelody}>Print Melody</span>
+            </section>
+            <section style={sectionStyles}>
+                <button style={{display: playBtnDisplay}} onClick={() => playAudio(false)}>Play Melody Only (without chords)</button>
+                <button style={{display: playBtnDisplay}} onClick={() => playAudio(true)}>Play With Chords</button>
+				<button style={{display: stopBtnDisplay}} onClick={stopAudio}>Stop Audio</button>
             </section>
             <div style={paperStyles} id="paper"></div>
         </>
