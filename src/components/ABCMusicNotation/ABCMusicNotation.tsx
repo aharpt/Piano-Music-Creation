@@ -37,7 +37,9 @@ const ABCMusicNotation = ({canSeeMelody, musicKey, chordList, melody} : Props) =
     };
 
     const songConstruction = constructSong(chordList, melody);
-    const visualObj = abcjs.renderAbc("paper", `X:1\nM: ${topTimeSignature}/4\nL: 1/4\nK:${musicKey}\n${songConstruction}\n`);
+    const visualObj = abcjs.renderAbc("paper", `X:1\nQ:180\nM: ${topTimeSignature}/4\nL: 1/4\nK:${musicKey}\n${songConstruction}\n`);
+
+
 
     const onMelodyClick = () : void => {
         if (displayValue === 'none') {
