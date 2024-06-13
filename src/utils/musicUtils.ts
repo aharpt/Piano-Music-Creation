@@ -1,5 +1,8 @@
 export type KeysType = "A" | "B" |  "C" | "D" | "E" | "F" | "G";
 export type ChordsType = 'A' | 'Am' | 'C' | 'D' | 'Dm' | 'E' | 'Em' | 'F' | 'G' | 'Gm'; 
+export type MelodyType = 
+        | 'A_Up' | 'A_Down' | 'Am_Up' | 'Am_Down' | 'C_Up' | 'C_Down' | 'D_Up' | 'D_Down' | 'Dm_Up' | 'Dm_Down'
+        | 'E_Up' | 'E_Down' | 'Em_Up' | 'Em_Down' | 'F_Up' | 'F_Down' | 'G_Up' | 'G_Down' | 'Gm_Up' | 'Gm_Down'; 
 
 export const MUSIC_KEYS : KeysType[] = [
     "A",
@@ -45,6 +48,29 @@ export const NOTES_PER_CHORD : {[key in ChordsType]: string[]} = {
     F: ['F', 'A', 'C'],
     G: ['G', 'B', 'D'],
     Gm: ['G', '_B', 'D'],
+}
+
+export const BEGINNER_MELODY_PER_CHORD : {[key in MelodyType]: string[]} = {
+    A_Up: ['A', '^c', 'e', 'a'],
+    A_Down: ['a', 'e', '^c', 'A'],
+    Am_Up: ['A', 'c', 'e', 'a'],
+    Am_Down: ['a', 'e', 'c', 'A'],
+    C_Up: ['C', 'E', 'G', 'c'],
+    C_Down: ['c', 'G', 'E', 'C'],
+    D_Up: ['D', '^F', 'A', 'd'],
+    D_Down: ['d', 'A', '^F', 'D'],
+    Dm_Up: ['D', 'F', 'A', 'd'],
+    Dm_Down: ['d', 'A', 'F', 'D'],
+    E_Up: ['E', '^G', 'B', 'e'],
+    E_Down: ['e', 'B', '^G', 'E'],
+    Em_Up: ['E', 'G', 'B', 'e'],
+    Em_Down: ['e', 'B', 'G', 'E'],
+    F_Up: ['F', 'A', 'c', 'f'],
+    F_Down: ['f', 'c', 'A', 'F'],
+    G_Up: ['G', 'B', 'D', 'g'],
+    G_Down: ['g', 'D', 'B', 'G'],
+    Gm_Up: ['G', '_B', 'D', 'g'],
+    Gm_Down: ['g', 'D', '_B', 'G'],
 }
 
 export const topTimeSignature = 4;
