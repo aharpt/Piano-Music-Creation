@@ -31,7 +31,7 @@ const AvailableModes = () : JSX.Element => {
 
     const showIntermediateMode = () => {
       setShouldShowIntermediateMode(true);
-      setShouldShowBeginnerMode(true);
+      setShouldShowBeginnerMode(false);
     }
 
     return (

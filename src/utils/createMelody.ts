@@ -1,4 +1,4 @@
-import { type ChordsType, topTimeSignature, BEGINNER_MELODY_PER_CHORD } from "./musicUtils";
+import { type ChordsType, topTimeSignature, BEGINNER_MELODY_PER_CHORD, PASSING_MELODY_PER_CHORD } from "./musicUtils";
 
 export const beginnerMelody = (chordList : ChordsType[]) : string[] => {
     const melodyNotes : string[] = [];
@@ -44,6 +44,46 @@ export const beginnerMelody = (chordList : ChordsType[]) : string[] => {
             upMelody = !upMelody;
     }
 
+    return melodyNotes;
+}
+
+export const passingMelody = (chordList : ChordsType[]) : string[] => {
+    const melodyNotes : string[] = [];
+    let upMelody : boolean = true;
+
+    for (let i = 0; i < chordList.length; i++) {
+        for (let j = 0; j < topTimeSignature; j++) {
+            switch (chordList[i]) {
+                case 'A':
+                    break;
+                case 'Am':
+                    break;
+                case 'C':
+                    melodyNotes.push(PASSING_MELODY_PER_CHORD['CDown_FUp'][j]);
+                    break;
+                case 'D':
+                    break;
+                case 'Dm':
+                    melodyNotes.push(PASSING_MELODY_PER_CHORD['DmDown_GmUp'][j]);
+                    break;
+                case 'E':
+                    break;
+                case 'Em':
+                    break;
+                case 'F':
+                    melodyNotes.push(PASSING_MELODY_PER_CHORD['FUp_DmDown'][j]);
+                    break;
+                case 'G':
+                    break;
+                case 'Gm':
+                    melodyNotes.push(PASSING_MELODY_PER_CHORD['GmUp_CDown'][j]);
+                    break;
+                default:
+                    break;
+            }
+        }
+        upMelody = !upMelody;
+    }
     return melodyNotes;
 }
 

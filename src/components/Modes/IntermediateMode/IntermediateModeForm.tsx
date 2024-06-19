@@ -1,7 +1,7 @@
 import React from 'react';
 import IntermediateMode from './IntermediateMode';
 import { MUSIC_KEYS, AVAILABLE_CHORDS, type KeysType, type ChordsType } from '../../../utils/musicUtils';
-import { beginnerMelody } from '../../../utils/createMelody';
+import { passingMelody } from '../../../utils/createMelody';
 import ABCMusicNotation from '../../ABCMusicNotation/ABCMusicNotation';
 
 const IntermediateModeForm = () : JSX.Element => {
@@ -68,8 +68,7 @@ const IntermediateModeForm = () : JSX.Element => {
         setCanSeeMelody(true);
     }
 
-    // NEED TO CHANGE THIS
-    const melody = beginnerMelody(chordList as ChordsType[]);
+    const melody = passingMelody(chordList as ChordsType[]);
 
   return (
     <>
