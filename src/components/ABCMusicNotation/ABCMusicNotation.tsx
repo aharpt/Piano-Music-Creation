@@ -13,11 +13,27 @@ type Props = {
 }
 
 type DisplayType = 'inline' | 'block' | 'inline-block' | 'none';
+
+function generateNotesList(length : number) {
+    let notesList : number[] = [];
+    for (let i = 0; i < length; i++) {
+        if (i === 0) {
+            notesList[i] = 4;
+        } else if (i === (length-1)) {
+            notesList[i] = 1;
+        } else {
+            notesList[i] = (Math.ceil(Math.random() * 3) + 1)
+        }
+    }
+    return notesList;
+}
+
 const ABCMusicNotation = ({canSeeMelody, musicKey, chordList, melody} : Props) => {
     const [displayValue, setDisplayValue] = React.useState<DisplayType>('none');
     const [playBtnDisplay, setPlayBtnDisplay] = React.useState<DisplayType>('inline-block');
     const [stopBtnDisplay, setStopBtnDisplay] = React.useState<DisplayType>('none');
     const [midiBuffer] = React.useState<abcjs.MidiBuffer>(new abcjs.synth.CreateSynth());
+    const [notesList, setNotesList] = React.useState<number[]>([]);
 
     const sectionStyles = {
         maxWidth: '80%',
@@ -36,7 +52,11 @@ const ABCMusicNotation = ({canSeeMelody, musicKey, chordList, melody} : Props) =
         display: displayValue
     };
 
-    const songConstruction = constructSong(chordList, melody);
+    React.useEffect(() => {
+        setNotesList(generateNotesList(chordList.length));
+    }, [chordList.length]);
+
+    const songConstruction = constructSong(chordList, melody, notesList);
     const visualObj = abcjs.renderAbc("paper", `X:1\nQ:180\nM: ${topTimeSignature}/4\nL: 1/4\nK:${musicKey}\n${songConstruction}\n`);
 
 
