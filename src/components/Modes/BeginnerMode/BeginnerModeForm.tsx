@@ -72,7 +72,7 @@ const BeginnerModeForm = () : JSX.Element => {
 
   return (
     <>
-    {shouldShowBeginnerMode ? <BeginnerMode melody={melody} musicKey={musicKey as KeysType} chordList={chordList as ChordsType[]} /> :
+    {shouldShowBeginnerMode ? <BeginnerMode musicKey={musicKey as KeysType} chordList={chordList as ChordsType[]} /> :
         <form style={formStyles}>
             <section style={sectionStyles}>
                 <label htmlFor="key">Please Select A Music Key</label>
